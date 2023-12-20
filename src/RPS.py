@@ -59,11 +59,16 @@ def assess_game(user_action, computer_action):
     return game_result
 
 
-def get_computer_action():
-    computer_selection = random.randint(0, len(GameAction) - 1)
-    computer_action = GameAction(computer_selection)
-    print(f"Computer picked {computer_action.name}.")
+def get_computer_action(user_inputs):
 
+    if len(user_inputs)==1:
+        computer_selection = random.randint(0, len(GameAction) - 1)
+        computer_action = GameAction(computer_selection)
+        print(f"Computer picked {computer_action.name}.")
+    else:
+        computer_selection = random.randint(0, len(GameAction) - 1)
+        computer_action = GameAction(computer_selection)
+        print(f"Computer picked {computer_action.name}.")
     return computer_action
 
 
@@ -83,16 +88,17 @@ def play_another_round():
 
 
 def main():
-
+    user_inputs=[]
     while True:
         try:
             user_action = get_user_action()
+            user_inputs.append(user_action)
         except ValueError:
             range_str = f"[0, {len(GameAction) - 1}]"
             print(f"Invalid selection. Pick a choice in range {range_str}!")
             continue
 
-        computer_action = get_computer_action()
+        computer_action = get_computer_action(user_inputs)
         assess_game(user_action, computer_action)
 
         if not play_another_round():
