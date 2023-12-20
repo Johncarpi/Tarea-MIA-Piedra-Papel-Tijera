@@ -1,5 +1,5 @@
 import pytest
-from src.RPS_dict import GameResult, GameAction, assess_game
+from src.RPS import GameResult, GameAction, assess_game
 
 @pytest.mark.draw
 def test_draw():
