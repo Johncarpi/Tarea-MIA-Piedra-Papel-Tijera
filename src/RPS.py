@@ -1,6 +1,6 @@
 import random
 from enum import IntEnum
-
+import pandas as pd
 
 class GameAction(IntEnum):
 
@@ -81,6 +81,13 @@ def get_user_action():
 
     return user_action
 
+def save_to_csv(user_inputs,computer_inputs):
+    results={"User":user_inputs,"Computer":computer_inputs}
+    df=pd.DataFrame(results)
+    folder_path= r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv"
+    df.to_csv(folder_path,index=False,mode="a")
+    
+
 
 def play_another_round():
     another_round = input("\nAnother round? (y/n): ")
@@ -89,6 +96,7 @@ def play_another_round():
 
 def main():
     user_inputs=[]
+    computer_inputs=[]
     while True:
         try:
             user_action = get_user_action()
@@ -99,9 +107,11 @@ def main():
             continue
 
         computer_action = get_computer_action(user_inputs)
+        computer_inputs.append(computer_action)
         assess_game(user_action, computer_action)
-
+       
         if not play_another_round():
+            save_to_csv(user_inputs,computer_inputs)
             break
 
 
