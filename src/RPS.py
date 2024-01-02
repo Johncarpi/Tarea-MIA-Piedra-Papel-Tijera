@@ -1,6 +1,7 @@
 import random
 from enum import IntEnum
 import pandas as pd
+import os
 
 class GameAction(IntEnum):
 
@@ -66,8 +67,10 @@ def get_computer_action(user_inputs):
         computer_action = GameAction(computer_selection)
         print(f"Computer picked {computer_action.name}.")
     else:
-        computer_selection = random.randint(0, len(GameAction) - 1)
-        computer_action = GameAction(computer_selection)
+        df=pd.read_csv(r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv")
+        User_results = df["User"].value_counts()
+        computer_selection_2= User_results.idxmax()
+        computer_action = GameAction(computer_selection_2)
         print(f"Computer picked {computer_action.name}.")
     return computer_action
 
@@ -85,7 +88,8 @@ def save_to_csv(user_inputs,computer_inputs):
     results={"User":user_inputs,"Computer":computer_inputs}
     df=pd.DataFrame(results)
     folder_path= r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv"
-    df.to_csv(folder_path,index=False,mode="a")
+    df.reset_index(drop=True,inplace=True)
+    df.to_csv(folder_path,index=False,mode="a", header=not os.path.exists(folder_path))
     
 
 
@@ -105,13 +109,11 @@ def main():
             range_str = f"[0, {len(GameAction) - 1}]"
             print(f"Invalid selection. Pick a choice in range {range_str}!")
             continue
-
         computer_action = get_computer_action(user_inputs)
         computer_inputs.append(computer_action)
         assess_game(user_action, computer_action)
-       
+        save_to_csv(user_inputs,computer_inputs)
         if not play_another_round():
-            save_to_csv(user_inputs,computer_inputs)
             break
 
 
