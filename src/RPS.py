@@ -60,7 +60,7 @@ def assess_game(user_action, computer_action):
     return game_result
 
 
-def get_computer_action(user_inputs,dificulty):
+def get_computer_action(dificulty):
     df=pd.read_csv(r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv")
     User_results = df["User"].value_counts()
     
@@ -93,7 +93,7 @@ def get_user_action():
 
     return user_action
 
-def save_to_csv(user_inputs,computer_inputs):
+def save_to_csv(user_inputs):
     results={user_inputs}
     df=pd.DataFrame(results)
     folder_path= r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv"
