@@ -44,17 +44,29 @@ def assess_game(user_action, computer_action):
         if computer_action == GameAction.Scissors:
             print("Rock smashes scissors. You won!")
             game_result = GameResult.Victory
+        elif computer_action == GameAction.Lizard:
+            print("Rock smashes Lizard. You won!")
+            game_result = GameResult.Victory
+        elif computer_action == GameAction.Spock:
+            print("Spock vaporizes the rock. You lost!")
+            game_result = GameResult.Defeat
         else:
             print("Paper covers rock. You lost!")
-            game_result = GameResult.Defeat
-
+            game_result=GameResult.Defeat
+  
     # You picked Paper
     elif user_action == GameAction.Paper:
         if computer_action == GameAction.Rock:
             print("Paper covers rock. You won!")
             game_result = GameResult.Victory
+        elif computer_action == GameAction.Spock :
+            print("Paper dissaproves Spock. You won!")
+            game_result = GameResult.Victory
+        elif computer_action == GameAction.Lizard:
+            print("Lizard eats Paper. You lost!")
+            game_result = GameResult.Defeat
         else:
-            print("Scissors cuts paper. You lost!")
+            print("Scissors cut paper. You lost!")
             game_result = GameResult.Defeat
 
     # You picked Scissors
@@ -62,9 +74,45 @@ def assess_game(user_action, computer_action):
         if computer_action == GameAction.Rock:
             print("Rock smashes scissors. You lost!")
             game_result = GameResult.Defeat
+        elif computer_action == GameAction.Lizard:
+            print("Scissors decapitates the lizard. You won!")
+            game_result = GameResult.Victory
+        elif computer_action == GameAction.Spock:
+            print("Spock smashes scissors. You lost!")
+            game_result == GameResult.Defeat
         else:
             print("Scissors cuts paper. You won!")
             game_result = GameResult.Victory
+
+    # You picked Lizard
+    elif user_action == GameAction.Lizard:
+        if computer_action == GameAction.Paper:
+            print("Lizard eats paper. You won!")
+            game_result == GameResult.Victory
+        elif computer_action == GameAction.Spock:
+            print("Lizard poisons Spock. You won!")
+            game_result == GameResult.Victory
+        elif computer_action == GameAction.Scissors:
+            print("Scissors decapitates Lizard. You lost!")
+            game_result == GameResult.Defeat
+        else:
+            print("Rock crushes Lizard. You lost!")
+            game_result == GameResult.Defeat
+
+    # You picked Spock
+    elif user_action == GameAction.Spock:
+        if computer_action == GameAction.Rock:
+            print("Spock vaporizes rock. You won!")
+            game_result == GameResult.Victory
+        elif computer_action == GameAction.Scissors:
+            print("Spock smashes scissors. You won!")
+            game_result == GameResult.Victory
+        elif computer_action == GameAction.Lizard:
+            print("Lizard poisons Spock. You lost!")
+            game_result == GameResult.Defeat
+        else:
+            print("Paper disaproves Spock. You lost!")
+            game_result == GameResult.Defeat
 
     return game_result
 
