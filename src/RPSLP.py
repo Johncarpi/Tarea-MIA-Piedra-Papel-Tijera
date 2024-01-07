@@ -118,7 +118,7 @@ def assess_game(user_action, computer_action):
 
 
 def get_computer_action(user_inputs,dificulty):
-    df=pd.read_csv(r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv")
+    df=pd.read_csv(r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results RPSLS.csv")
     User_results = df["User"].value_counts()
     
     if dificulty==2:
@@ -132,11 +132,20 @@ def get_computer_action(user_inputs,dificulty):
     elif dificulty==0:
         game_result= User_results.idxmax()
         if game_result==0:
-            computer_action = GameAction(1)
+            choices=[1,4]
+            computer_action = GameAction(random.choice(choices))
         elif game_result==1:
-            computer_action = GameAction(2)
+            choices=[2,3]
+            computer_action = GameAction(random.choice(choices))
         elif game_result==2:
-            computer_action = GameAction(0)
+            choices=[0,4]
+            computer_action = GameAction(random.choice(choices))
+        elif game_result==3:
+            choices=[2,0]
+            computer_action = GameAction(random.choice(choices))
+        elif game_result==4:
+            choices=[1,3]
+            computer_action = GameAction(random.choice(choices))
         print(f"Computer picked {computer_action.name}.")
     return computer_action
 
@@ -153,7 +162,7 @@ def get_user_action():
 def save_to_csv(user_inputs,computer_inputs):
     results={user_inputs}
     df=pd.DataFrame(results)
-    folder_path= r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv"
+    folder_path= r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results RPSLS.csv"
     df.reset_index(drop=True,inplace=True)
     df.to_csv(folder_path,index=False,mode="a", header=not os.path.exists(folder_path))
     
