@@ -65,22 +65,32 @@ def get_computer_action(dificulty):
     User_results = df["User"].value_counts()
     
     if dificulty==2:
-        computer_selection= User_results.idxmax()
-        computer_action = GameAction(computer_selection)
-        print(f"Computer picked {computer_action.name}.")
+        try:
+            computer_selection= User_results.idxmax()
+            computer_action = GameAction(computer_selection)
+            print(f"Computer picked {computer_action.name}.")
+        except:
+            computer_selection = random.randint(0, len(GameAction) - 1)
+            computer_action = GameAction(computer_selection)
+            print(f"Computer picked {computer_action.name}.")
     elif dificulty==1:
         computer_selection = random.randint(0, len(GameAction) - 1)
         computer_action = GameAction(computer_selection)
         print(f"Computer picked {computer_action.name}.")
     elif dificulty==0:
-        game_result= User_results.idxmax()
-        if game_result==0:
-            computer_action = GameAction(1)
-        elif game_result==1:
-            computer_action = GameAction(2)
-        elif game_result==2:
-            computer_action = GameAction(0)
-        print(f"Computer picked {computer_action.name}.")
+        try:
+            game_result= User_results.idxmax()
+            if game_result==0:
+                computer_action = GameAction(1)
+            elif game_result==1:
+                computer_action = GameAction(2)
+            elif game_result==2:
+                computer_action = GameAction(0)
+            print(f"Computer picked {computer_action.name}.")
+        except:
+            computer_selection = random.randint(0, len(GameAction) - 1)
+            computer_action = GameAction(computer_selection)
+            print(f"Computer picked {computer_action.name}.")
     return computer_action
 
 
@@ -118,11 +128,11 @@ def main():
             range_str = f"[0, {len(GameAction) - 1}]"
             print(f"Invalid selection. Pick a choice in range {range_str}!")
             continue
-        computer_action = get_computer_action(user_inputs,dificulty)
+        computer_action = get_computer_action(dificulty)
         computer_inputs=computer_action
         assess_game(user_action, computer_action)
 
-        save_to_csv(user_inputs,computer_inputs)
+        save_to_csv(user_inputs)
         if not play_another_round():
             break
 

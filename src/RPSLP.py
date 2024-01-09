@@ -117,36 +117,46 @@ def assess_game(user_action, computer_action):
     return game_result
 
 
-def get_computer_action(user_inputs,dificulty):
+def get_computer_action(dificulty):
     df=pd.read_csv(r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results RPSLS.csv")
     User_results = df["User"].value_counts()
     
     if dificulty==2:
-        computer_selection= User_results.idxmax()
-        computer_action = GameAction(computer_selection)
-        print(f"Computer picked {computer_action.name}.")
+        try:
+            computer_selection= User_results.idxmax()
+            computer_action = GameAction(computer_selection)
+            print(f"Computer picked {computer_action.name}.")
+        except:
+            computer_selection = random.randint(0, len(GameAction) - 1)
+            computer_action = GameAction(computer_selection)
+            print(f"Computer picked {computer_action.name}.")
     elif dificulty==1:
         computer_selection = random.randint(0, len(GameAction) - 1)
         computer_action = GameAction(computer_selection)
         print(f"Computer picked {computer_action.name}.")
     elif dificulty==0:
-        game_result= User_results.idxmax()
-        if game_result==0:
-            choices=[1,4]
-            computer_action = GameAction(random.choice(choices))
-        elif game_result==1:
-            choices=[2,3]
-            computer_action = GameAction(random.choice(choices))
-        elif game_result==2:
-            choices=[0,4]
-            computer_action = GameAction(random.choice(choices))
-        elif game_result==3:
-            choices=[2,0]
-            computer_action = GameAction(random.choice(choices))
-        elif game_result==4:
-            choices=[1,3]
-            computer_action = GameAction(random.choice(choices))
-        print(f"Computer picked {computer_action.name}.")
+        try:
+            game_result= User_results.idxmax()
+            if game_result==0:
+                choices=[1,4]
+                computer_action = GameAction(random.choice(choices))
+            elif game_result==1:
+                choices=[2,3]
+                computer_action = GameAction(random.choice(choices))
+            elif game_result==2:
+                choices=[0,4]
+                computer_action = GameAction(random.choice(choices))
+            elif game_result==3:
+                choices=[2,0]
+                computer_action = GameAction(random.choice(choices))
+            elif game_result==4:
+                choices=[1,3]
+                computer_action = GameAction(random.choice(choices))
+            print(f"Computer picked {computer_action.name}.")
+        except:
+            computer_selection = random.randint(0, len(GameAction) - 1)
+            computer_action = GameAction(computer_selection)
+            print(f"Computer picked {computer_action.name}.")
     return computer_action
 
 
@@ -159,7 +169,7 @@ def get_user_action():
 
     return user_action
 
-def save_to_csv(user_inputs,computer_inputs):
+def save_to_csv(user_inputs):
     results={user_inputs}
     df=pd.DataFrame(results)
     folder_path= r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results RPSLS.csv"
@@ -184,11 +194,11 @@ def main():
             range_str = f"[0, {len(GameAction) - 1}]"
             print(f"Invalid selection. Pick a choice in range {range_str}!")
             continue
-        computer_action = get_computer_action(user_inputs,dificulty)
+        computer_action = get_computer_action(dificulty)
         computer_inputs=computer_action
         assess_game(user_action, computer_action)
 
-        save_to_csv(user_inputs,computer_inputs)
+        save_to_csv(user_inputs)
         if not play_another_round():
             break
 
