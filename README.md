@@ -20,4 +20,4 @@ En la dificultada normal simplemente la decisión de que input sacar sera comple
 
 Y por último en la dificultad dificil, el programa leera el csv y según el input que más haya utilizado el usuario el ordenador sacara la opción para ganar al usuario.
 
-Esta estrategia tambien es completamente aplicable a un juego de Piedra,papel,tijera,lagarto y spock.
+Esta estrategia tambien es completamente aplicable a un juego de Piedra,papel,tijera,lagarto y spock.a
