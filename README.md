@@ -18,6 +18,6 @@ En la dificultad facil utlizaremos el agente inteligente de manera sencilla de t
 
 En la dificultada normal simplemente la decisión de que input sacar sera completamente al azar.
 
-Y por último en la dificultad dificil, el programa leera el csv y según el input que más haya utilizado el usuario el ordenador sacara la opción para ganar al usuario.
+Y por último en la dificultad dificil, el programa leera el csv y según el input que más haya utilizado el usuario el ordenador sacara la opción para ganar al usuario .
 
 Esta estrategia tambien es completamente aplicable a un juego de Piedra,papel,tijera,lagarto y spock.
