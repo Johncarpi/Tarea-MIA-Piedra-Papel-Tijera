@@ -61,7 +61,7 @@ def assess_game(user_action, computer_action):
 
 
 def get_computer_action(dificulty):
-    df=pd.read_csv(r"C:\Users\34658\Desktop\Ejercicios\Python\Tarea-MIA-Piedra-Papel-Tijera\doc\Game results.csv")
+    df=pd.read_csv("doc\Game results.csv")
     User_results = df["User"].value_counts()
     
     if dificulty==2:
